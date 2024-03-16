@@ -1,0 +1,38 @@
+class Solution(object):
+    def isPossible(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        freq_map = defaultdict(int)
+        end_map = defaultdict(int)
+
+        # Count the frequency of each number in nums
+        for num in nums:
+            freq_map[num] += 1
+
+        # Iterate through nums
+        for num in nums:
+            # If the frequency of num is 0, it has been used in a subsequence
+            if freq_map[num] == 0:
+                continue
+
+            # If there is a subsequence ending at num - 1, extend it
+            elif end_map[num - 1] > 0:
+                end_map[num - 1] -= 1
+                end_map[num] += 1
+
+            # If num can be the start of a new subsequence
+            elif freq_map[num + 1] > 0 and freq_map[num + 2] > 0:
+                freq_map[num + 1] -= 1
+                freq_map[num + 2] -= 1
+                end_map[num + 2] += 1
+
+            # If none of the above conditions are met, it is impossible to split nums
+            else:
+                return False
+
+            # Reduce the frequency of num since it has been used
+            freq_map[num] -= 1
+
+        return True
