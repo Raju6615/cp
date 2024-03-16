@@ -1,0 +1,19 @@
+class Solution(object):
+    def destCity(self, paths):
+        """
+        :type paths: List[List[str]]
+        :rtype: str
+        """
+        # Create a set to store all starting cities
+        starting_cities = set()
+
+        # Iterate through each path in the input list
+        for path in paths:
+            # Add the starting city to the set
+            starting_cities.add(path[0])
+
+        # Iterate through each path again to find the city without an outgoing path
+        for path in paths:
+            # Check if the destination city is not in the set of starting cities
+            if path[1] not in starting_cities:
+                return path[1]
