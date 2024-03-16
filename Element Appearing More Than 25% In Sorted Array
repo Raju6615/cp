@@ -1,0 +1,11 @@
+class Solution(object):
+    def findSpecialInteger(self, arr):
+        """
+        :type arr: List[int]
+        :rtype: int
+        """
+        n =len(arr)
+        threshold = 0.25
+        for i in range(n):
+            if arr.count(arr[i]) > n * threshold:
+                return arr[i]
