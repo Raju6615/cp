@@ -1,0 +1,22 @@
+class Solution(object):
+    def findLongestChain(self, pairs):
+
+        """
+        :type pairs: List[List[int]]
+        :rtype: int
+        """
+        pairs.sort(key=lambda x: x[1])
+
+        # Initialize variables
+        longest_chain = 0
+        current_end = float('-inf')
+
+        # Iterate through pairs
+        for pair in pairs:
+            # If the first element of the current pair is greater than the current end,
+            # update the chain and the current end
+            if pair[0] > current_end:
+                longest_chain += 1
+                current_end = pair[1]
+
+        return longest_chain
